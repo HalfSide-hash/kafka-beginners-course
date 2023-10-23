@@ -13,7 +13,7 @@ public class ProducerDemo {
     private static final Logger log = LoggerFactory.getLogger(ProducerDemo.class.getSimpleName());
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        System.out.println("Yeah I produce");
 
         //Define Properties
         Properties props = new Properties();
