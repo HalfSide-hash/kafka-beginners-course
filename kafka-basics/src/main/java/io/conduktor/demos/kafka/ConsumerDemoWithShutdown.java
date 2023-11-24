@@ -2,6 +2,7 @@ package io.conduktor.demos.kafka;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +40,42 @@ public class ConsumerDemoWithShutdown {
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
 
-        consumer.subscribe(Arrays.asList(topic));
+        final Thread mainThread = Thread.currentThread();
 
-        while (true){
-            log.info("polling");
 
-            ConsumerRecords<String,String> records = consumer.poll(Duration.ofMillis(1000));
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            public void run(){
+                log.info("shut that junk down");
+                consumer.wakeup();
 
-            for (ConsumerRecord<String, String> record : records){
-                log.info("key: " + record.key() + ", value: " + record.value());
-                log.info("Partition: " + record.partition() + ", offset: " + record.offset());
+                try {
+                    mainThread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
+        });
+
+        try {
+            consumer.subscribe(Arrays.asList(topic));
+
+            while (true) {
+                log.info("polling");
+
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+
+                for (ConsumerRecord<String, String> record : records) {
+                    log.info("key: " + record.key() + ", value: " + record.value());
+                    log.info("Partition: " + record.partition() + ", offset: " + record.offset());
+                }
+            }
+        } catch (WakeupException e) {
+            log.info("Lets shut down fr fr");
+        } catch (Exception e){
+            log.info("unexpected error: "+ e);
+        } finally{
+            consumer.close();
+            log.info("consumer took that L gracefully");
         }
 
     }
