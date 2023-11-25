@@ -60,7 +60,6 @@ public class ConsumerDemoWithShutdown {
             consumer.subscribe(Arrays.asList(topic));
 
             while (true) {
-                log.info("polling");
 
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
 

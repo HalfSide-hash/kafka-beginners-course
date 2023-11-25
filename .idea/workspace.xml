@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95676afb-ac57-46ae-9905-070fec4200af" name="Changes" comment="commiting demo with shutdown">
+    <list default="true" id="95676afb-ac57-46ae-9905-070fec4200af" name="Changes" comment="shut down gracefully">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kafka-basics/src/main/java/io/conduktor/demos/kafka/ConsumerDemoWithShutdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-basics/src/main/java/io/conduktor/demos/kafka/ConsumerDemoWithShutdown.java" afterDir="false" />
     </list>
@@ -232,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700866705456</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="shut down gracefully">
+      <created>1700868500288</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1700868500288</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,7 +261,8 @@
     <MESSAGE value="why did this changr" />
     <MESSAGE value="producing demo with keys and start of consumer" />
     <MESSAGE value="commiting demo with shutdown" />
-    <option name="LAST_COMMIT_MESSAGE" value="commiting demo with shutdown" />
+    <MESSAGE value="shut down gracefully" />
+    <option name="LAST_COMMIT_MESSAGE" value="shut down gracefully" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
